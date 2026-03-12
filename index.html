@@ -285,6 +285,148 @@
   }
   .restart-btn:hover { background: var(--ink); color: white; border-color: var(--ink); }
 
+
+  /* ── Settings Button ── */
+  .settings-btn {
+    flex-shrink: 0;
+    margin-top: 2px;
+    padding: 7px 14px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    color: rgba(255,255,255,0.7);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 0.5px;
+  }
+  .settings-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
+
+  /* ── Modal ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,20,0.55);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(3px);
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: white;
+    border-radius: 16px;
+    width: 500px;
+    max-width: 94vw;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    overflow: hidden;
+    animation: modalIn 0.2s ease;
+  }
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(12px) scale(0.97); }
+    to   { opacity: 1; transform: none; }
+  }
+  .modal-header {
+    background: var(--ink);
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .modal-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .modal-close {
+    background: none; border: none;
+    color: rgba(255,255,255,0.5); cursor: pointer;
+    font-size: 20px; line-height: 1; padding: 0 2px; transition: color 0.15s;
+  }
+  .modal-close:hover { color: white; }
+  .modal-body { padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+  .field-label {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .model-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .model-card {
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 11px 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+  }
+  .model-card:hover { border-color: #888; }
+  .model-card.selected { border-color: var(--ink); background: #f4f2ff; }
+  .model-card.selected::after {
+    content: '✓';
+    position: absolute; top: 8px; right: 10px;
+    font-size: 11px; color: var(--accent2); font-weight: 700;
+  }
+  .model-provider {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: var(--muted); letter-spacing: 0.5px; margin-bottom: 3px;
+  }
+  .model-name { font-size: 13px; font-weight: 500; color: var(--ink); line-height: 1.3; }
+  .model-badge {
+    display: inline-block; margin-top: 5px; font-size: 10px;
+    padding: 1px 6px; border-radius: 4px;
+    background: rgba(232,168,56,0.15); color: #9a6b0d;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .model-badge.cn { background: rgba(45,106,79,0.1); color: var(--accent2); }
+  .key-input-wrap { position: relative; }
+  .key-input {
+    width: 100%;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    padding: 10px 40px 10px 12px;
+    font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--ink);
+    outline: none; transition: border-color 0.2s; background: #fafafa;
+  }
+  .key-input:focus { border-color: var(--ink); background: white; }
+  .key-toggle {
+    position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+    background: none; border: none; cursor: pointer; color: var(--muted); font-size: 13px;
+  }
+  .key-hint { margin-top: 6px; font-size: 11.5px; color: var(--muted); line-height: 1.5; }
+  .key-hint a { color: var(--accent2); text-decoration: none; }
+  .key-hint a:hover { text-decoration: underline; }
+  .modal-save {
+    width: 100%; padding: 12px; background: var(--ink); color: white;
+    border: none; border-radius: 8px; font-family: 'Noto Sans SC', sans-serif;
+    font-size: 14px; cursor: pointer; transition: background 0.2s;
+  }
+  .modal-save:hover { background: #2d2d4e; }
+  .active-model-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    color: rgba(255,255,255,0.4); margin-top: 6px;
+  }
+  .active-model-dot {
+    width: 5px; height: 5px; border-radius: 50%; background: var(--accent2);
+  }
+  .no-key-banner {
+    display: none;
+    background: rgba(200,75,49,0.12); border: 1px solid rgba(200,75,49,0.3);
+    border-radius: 8px; padding: 10px 16px; margin-top: 16px;
+    font-size: 13px; color: var(--accent);
+    text-align: center; cursor: pointer;
+  }
+  .no-key-banner:hover { background: rgba(200,75,49,0.18); }
+
   @media (max-width: 600px) {
     main { padding: 0 16px 24px; }
     .header-inner { padding: 20px 16px 16px; }
@@ -297,9 +439,20 @@
 
 <header>
   <div class="header-inner">
-    <div class="header-tag">数据结构 · 探究学习</div>
-    <h1>线性表<span>在软件设计中的应用</span></h1>
-    <div class="header-sub">与 AI 助手对话，探索线性表背后的工程思维</div>
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;">
+      <div>
+        <div class="header-tag">数据结构 · 探究学习</div>
+        <h1>线性表<span>在软件设计中的应用</span></h1>
+        <div class="header-sub">与 AI 助手对话，探索线性表背后的工程思维</div>
+        <div class="active-model-badge">
+          <div class="active-model-dot"></div>
+          <span id="activeModelLabel">未配置模型</span>
+        </div>
+      </div>
+      <button class="settings-btn" onclick="openSettings()">
+        ⚙ 模型设置
+      </button>
+    </div>
     <div class="progress-bar-wrap">
       <span class="progress-label">探究进度</span>
       <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
@@ -308,11 +461,40 @@
   </div>
 </header>
 
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeOnOverlay(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">模型设置</span>
+      <button class="modal-close" onclick="closeSettings()">×</button>
+    </div>
+    <div class="modal-body">
+      <div>
+        <div class="field-label">选择模型</div>
+        <div class="model-grid" id="modelGrid"></div>
+      </div>
+      <div>
+        <div class="field-label">API Key</div>
+        <div class="key-input-wrap">
+          <input class="key-input" type="password" id="apiKeyInput" placeholder="粘贴你的 API Key…" />
+          <button class="key-toggle" onclick="toggleKeyVisibility()">👁</button>
+        </div>
+        <div class="key-hint" id="keyHint">请先选择模型</div>
+      </div>
+      <button class="modal-save" onclick="saveSettings()">保存并开始</button>
+    </div>
+  </div>
+</div>
+
 <main>
   <div class="info-card">
     <div class="info-item"><div class="info-dot"></div>最多 10 轮对话</div>
     <div class="info-item"><div class="info-dot gold"></div>AI 以启发为主，不直接给答案</div>
     <div class="info-item"><div class="info-dot red"></div>AI 动态判断，充分后自动总结</div>
+  </div>
+
+  <div class="no-key-banner" id="noKeyBanner" onclick="openSettings()">
+    ⚠️ 请先点击右上角「模型设置」配置 API Key 后开始使用
   </div>
 
   <div class="chat-wrap">
@@ -417,35 +599,188 @@ const SUMMARY_PROMPT = `根据刚才与学生的完整对话，完成以下任�
 }`;
 
 // ══════════════════════════════════════════════════════
+//  MODELS
+// ══════════════════════════════════════════════════════
+const MODELS = [
+  {
+    id: 'deepseek-chat',
+    provider: 'DeepSeek',
+    name: 'DeepSeek Chat',
+    badge: '国内直连',
+    badgeClass: 'cn',
+    keyHint: '前往 <a href="https://platform.deepseek.com" target="_blank">platform.deepseek.com</a> 获取 API Key',
+    buildRequest(apiKey, system, messages, maxTokens) {
+      return {
+        url: 'https://api.deepseek.com/v1/chat/completions',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+        body: { model: 'deepseek-chat', max_tokens: maxTokens,
+          messages: [{ role: 'system', content: system }, ...messages] }
+      };
+    },
+    parseResponse(data) {
+      if (data.error) throw new Error(data.error.message || JSON.stringify(data.error));
+      return data.choices?.[0]?.message?.content || '';
+    }
+  },
+  {
+    id: 'qwen-plus',
+    provider: '阿里云',
+    name: 'Qwen Plus',
+    badge: '国内直连',
+    badgeClass: 'cn',
+    keyHint: '前往 <a href="https://dashscope.console.aliyun.com" target="_blank">阿里云百炼</a> 获取 API Key',
+    buildRequest(apiKey, system, messages, maxTokens) {
+      return {
+        url: 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+        body: { model: 'qwen-plus', max_tokens: maxTokens,
+          messages: [{ role: 'system', content: system }, ...messages] }
+      };
+    },
+    parseResponse(data) {
+      if (data.error) throw new Error(data.error.message || JSON.stringify(data.error));
+      return data.choices?.[0]?.message?.content || '';
+    }
+  },
+  {
+    id: 'gpt-4o',
+    provider: 'OpenAI',
+    name: 'GPT-4o',
+    badge: '需境外网络',
+    badgeClass: '',
+    keyHint: '前往 <a href="https://platform.openai.com" target="_blank">platform.openai.com</a> 获取 API Key',
+    buildRequest(apiKey, system, messages, maxTokens) {
+      return {
+        url: 'https://api.openai.com/v1/chat/completions',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+        body: { model: 'gpt-4o', max_tokens: maxTokens,
+          messages: [{ role: 'system', content: system }, ...messages] }
+      };
+    },
+    parseResponse(data) {
+      if (data.error) throw new Error(data.error.message || JSON.stringify(data.error));
+      return data.choices?.[0]?.message?.content || '';
+    }
+  },
+  {
+    id: 'claude-sonnet',
+    provider: 'Anthropic',
+    name: 'Claude Sonnet 4',
+    badge: '需境外网络',
+    badgeClass: '',
+    keyHint: '前往 <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> 获取 API Key',
+    buildRequest(apiKey, system, messages, maxTokens) {
+      return {
+        url: 'https://api.anthropic.com/v1/messages',
+        headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+        body: { model: 'claude-sonnet-4-20250514', max_tokens: maxTokens, system, messages }
+      };
+    },
+    parseResponse(data) {
+      if (data.error) throw new Error(data.error.message || JSON.stringify(data.error));
+      return data.content?.map(b => b.text || '').join('') || '';
+    }
+  }
+];
+
+// ══════════════════════════════════════════════════════
 //  STATE
 // ══════════════════════════════════════════════════════
 let history = [], round = 0, isFinished = false, isSending = false;
+let apiKey = '', selectedModelId = '';
 const MAX_ROUNDS = 10;
 
+function getModel() { return MODELS.find(m => m.id === selectedModelId); }
+
+function persistSettings() {
+  sessionStorage.setItem('ds_model', selectedModelId);
+  sessionStorage.setItem('ds_key', apiKey);
+}
+function loadSettings() {
+  selectedModelId = sessionStorage.getItem('ds_model') || '';
+  apiKey = sessionStorage.getItem('ds_key') || '';
+}
+
 // ══════════════════════════════════════════════════════
-//  API CALL  —— 在 claude.ai artifact 环境中无需 API Key
+//  SETTINGS MODAL
+// ══════════════════════════════════════════════════════
+function renderModelGrid() {
+  const grid = document.getElementById('modelGrid');
+  grid.innerHTML = MODELS.map(m => `
+    <div class="model-card ${selectedModelId === m.id ? 'selected' : ''}"
+         onclick="selectModel('${m.id}')">
+      <div class="model-provider">${m.provider}</div>
+      <div class="model-name">${m.name}</div>
+      <span class="model-badge ${m.badgeClass}">${m.badge}</span>
+    </div>`).join('');
+}
+
+function selectModel(id) {
+  selectedModelId = id;
+  renderModelGrid();
+  const m = getModel();
+  if (m) document.getElementById('keyHint').innerHTML = m.keyHint;
+}
+
+function openSettings() {
+  renderModelGrid();
+  document.getElementById('apiKeyInput').value = apiKey;
+  if (selectedModelId) {
+    const m = getModel();
+    if (m) document.getElementById('keyHint').innerHTML = m.keyHint;
+  }
+  document.getElementById('modalOverlay').classList.add('open');
+}
+function closeSettings() { document.getElementById('modalOverlay').classList.remove('open'); }
+function closeOnOverlay(e) { if (e.target === document.getElementById('modalOverlay')) closeSettings(); }
+function toggleKeyVisibility() {
+  const inp = document.getElementById('apiKeyInput');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+}
+function saveSettings() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (!selectedModelId) { alert('请先选择一个模型'); return; }
+  if (!key) { alert('请填入 API Key'); return; }
+  apiKey = key;
+  persistSettings();
+  closeSettings();
+  updateModelLabel();
+  document.getElementById('noKeyBanner').style.display = 'none';
+  enableChat();
+}
+function updateModelLabel() {
+  const m = getModel();
+  document.getElementById('activeModelLabel').textContent =
+    m ? `${m.provider} · ${m.name}` : '未配置模型';
+}
+function enableChat() {
+  document.getElementById('userInput').disabled = false;
+  document.getElementById('userInput').placeholder = '输入你的想法或问题……';
+  document.getElementById('sendBtn').disabled = false;
+}
+
+// ══════════════════════════════════════════════════════
+//  API CALL
 // ══════════════════════════════════════════════════════
 async function callAI(system, messages, maxTokens = 1000) {
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
+  const model = getModel();
+  if (!model) throw new Error('未选择模型');
+  if (!apiKey) throw new Error('未填写 API Key');
+  const req = model.buildRequest(apiKey, system, messages, maxTokens);
+  const res = await fetch(req.url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: maxTokens,
-      system,
-      messages
-    })
+    headers: req.headers,
+    body: JSON.stringify(req.body)
   });
   const data = await res.json();
-  if (data.error) throw new Error(data.error.message || JSON.stringify(data.error));
-  return data.content?.map(b => b.text || '').join('') || '';
+  return model.parseResponse(data);
 }
 
 // ══════════════════════════════════════════════════════
 //  CHAT
 // ══════════════════════════════════════════════════════
 async function sendMessage() {
-  if (isSending || isFinished) return;
+  if (isSending || isFinished || !apiKey || !selectedModelId) return;
   const input = document.getElementById('userInput');
   const text = input.value.trim();
   if (!text) return;
@@ -619,7 +954,7 @@ function restart() {
   document.getElementById('hintArea').style.display = 'flex';
   document.getElementById('restartBtn').style.display = 'none';
   document.getElementById('userInput').placeholder = '输入你的想法或问题……';
-  setInputEnabled(true);
+  if (apiKey && selectedModelId) enableChat();
   showOpening();
 }
 
@@ -627,7 +962,20 @@ function showOpening() {
   appendAIMessage(`你好！👋 我们来聊聊线性表在实际软件中的应用。\n\n先热个身：**你平时用的哪些 App 或软件**，让你感觉"它在记录一系列有顺序的东西"？\n\n不用想得太复杂，说说你第一个浮现的例子就好。`);
 }
 
-window.onload = showOpening;
+window.onload = () => {
+  loadSettings();
+  updateModelLabel();
+  showOpening();
+  if (apiKey && selectedModelId) {
+    enableChat();
+  } else {
+    document.getElementById('userInput').disabled = true;
+    document.getElementById('userInput').placeholder = '请先点击右上角「模型设置」配置 API Key';
+    document.getElementById('sendBtn').disabled = true;
+    document.getElementById('noKeyBanner').style.display = 'block';
+    setTimeout(openSettings, 450);
+  }
+};
 </script>
 </body>
 </html>
